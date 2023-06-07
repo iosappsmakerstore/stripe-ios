@@ -239,7 +239,7 @@ extension CustomerSheetTestPlayground {
         customerSheet = nil
         paymentOptionSelection = nil
 
-        var customerType = customerTypeString
+        let customerType = customerTypeString
         self.backend = CustomerSheetBackend(endpoint: currentEndpoint)
 
 //        TODO: Refactor this to make the ephemeral key and customerId fetching async
