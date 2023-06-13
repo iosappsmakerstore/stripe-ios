@@ -70,16 +70,20 @@ class CardDetailsEditView: UIView, AddPaymentMethodView, CardScanningViewDelegat
         }
     }
 
-    @available(iOS 13, *)
-    lazy var cardScanningView: CardScanningView? = {
-        if !STPCardScanner.cardScanningAvailable() {
-            return nil  // Don't initialize the scanner
+    private var _cardScanningView: Any? = nil
+    @available(iOS 13.0, *)
+    fileprivate var cardScanningView: CardScanningView? {
+        if _cardScanningView == nil {
+            if !STPCardScanner.cardScanningAvailable() {
+                return nil  // Don't initialize the scanner
+            }
+            let scanningView = CardScanningView()
+            scanningView.alpha = 0
+            scanningView.isHidden = true
+            _cardScanningView = scanningView
         }
-        let scanningView = CardScanningView()
-        scanningView.alpha = 0
-        scanningView.isHidden = true
-        return scanningView
-    }()
+            return _cardScanningView as? CardScanningView
+    }
 
     weak var lastScanButton: UIButton?
     @objc func scanButtonTapped(_ button: UIButton) {

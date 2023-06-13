@@ -115,8 +115,11 @@ public class STPAddCardViewController: STPCoreTableViewController, STPAddressVie
     private weak var cardImageView: UIImageView?
     private var doneItem: UIBarButtonItem?
     private var cardHeaderView: STPSectionHeaderView?
+    private var _cardScanner: Any? = nil
     @available(iOS 13, *)
-    private lazy var cardScanner: STPCardScanner? = nil
+    private var cardScanner: STPCardScanner? {
+        return _cardScanner as? STPCardScanner
+    }
     private var scannerCell: STPCardScannerTableViewCell?
 
     private var _isScanning = false
@@ -208,7 +211,7 @@ public class STPAddCardViewController: STPCoreTableViewController, STPAddressVie
         title = STPLocalizedString("Add a Card", "Title for Add a Card view")
 
         if #available(iOS 13.0, *) {
-            cardScanner = STPCardScanner()
+            _cardScanner = STPCardScanner()
         }
     }
 
@@ -339,7 +342,7 @@ public class STPAddCardViewController: STPCoreTableViewController, STPAddressVie
 
             let cardScanner = STPCardScanner(delegate: self)
             cardScanner.cameraView = scannerCell.cameraView
-            self.cardScanner = cardScanner
+            _cardScanner = cardScanner
 
             cardHeaderView?.buttonHidden = false
             cardHeaderView?.button?.setTitle(

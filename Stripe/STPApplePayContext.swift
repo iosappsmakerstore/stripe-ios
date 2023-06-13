@@ -205,7 +205,7 @@ import PassKit
         )?
         let pk_didSelectShippingMethod = #selector(
             (PKPaymentAuthorizationControllerDelegate.paymentAuthorizationController(
-                _:didSelectShippingMethod:handler:)) as pkDidSelectShippingMethodSignature)
+                _:didSelectShippingMethod:handler:)))
         let stp_didSelectShippingMethod = #selector(
             STPApplePayContextDelegate.applePayContext(_:didSelect:handler:))
         let pk_didSelectShippingContact = #selector(
